@@ -36,6 +36,8 @@ RUN apt-get update && apt-get install -y \
     gdebi-core \
     && apt-get clean
 
+RUN mkdir -p /mnt/extra-addons/
+
 # Copiar los addons personalizados dentro del contenedor
 COPY ../addons_customs/package_calculation /mnt/extra-addons/package_calculation
 
