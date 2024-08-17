@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="report_package_wizard_form" model="ir.ui.view">
+            <field name="name">report.package.calculation</field>
+            <field name="model">report.package.calculation</field>
+            <field name="arch" type="xml">
+                <form>
+                    <div style="overflow-y:auto; max-height:100px; padding-center:4px; padding-right:20px; padding-left:40px; width=10px">
+                        <h4>Generar Reporte XLS.</h4>                             
+                    </div>
+
+                    <footer>
+                        <button string="Generar Reporte XLS" type="object" name="report_action_xls" class="oe_highlight"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="report_package_wizard_action" model="ir.actions.act_window">
+            <field name="name">report package calculation</field>
+            <field name="res_model">report.package.calculation</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="view_id" ref="report_package_wizard_form"/>
+        </record>
+
+        <menuitem 
+        id="menu_report_packages" 
+        name="Generar Reportes" 
+        parent= "menu_package_calculation"
+        sequence="10" 
+        action="report_package_wizard_action"/>
+
+    </data>
+</odoo>

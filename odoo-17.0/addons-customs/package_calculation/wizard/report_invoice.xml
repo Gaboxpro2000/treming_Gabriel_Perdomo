@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="report_invoice_wizard_form" model="ir.ui.view">
+            <field name="name">report.payment.invoices</field>
+            <field name="model">report.payment.invoices</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <group>
+                            <field name="start_date" />
+                            <field name="end_date" />                                               
+                        </group>
+                    </group>
+
+                    <footer>
+                        <button string="Generar Reporte PDF" type="object" name="report_action_pdf" class="oe_highlight"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="report_invoice_wizard_action" model="ir.actions.act_window">
+            <field name="name">report payment invoices</field>
+            <field name="res_model">report.payment.invoices</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="view_id" ref="report_invoice_wizard_form"/>
+        </record>
+
+        <menuitem 
+        id="menu_report_invoices" 
+        name="Generar Reportes" 
+        parent= "account.menu_finance_reports"
+        sequence="10" 
+        action="report_invoice_wizard_action"/>
+
+    </data>
+</odoo>

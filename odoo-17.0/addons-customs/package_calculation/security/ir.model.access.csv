@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_package_calculation,package.calculation,model_package_calculation,base.group_user,1,1,1,1
+access_report_payment_invoices,report.payment.invoices,model_report_payment_invoices,base.group_user,1,1,1,1
+access_report_package_calculation,report.package.calculation,model_report_package_calculation,base.group_user,1,1,1,1

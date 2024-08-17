@@ -1,0 +1,51 @@
+<odoo>
+	<data>
+        <record id="print_invoices" model="ir.actions.report">
+            <field name="name">Facturas PDF</field>
+            <field name="model">report.payment.invoices</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">package_calculation.report_invoices</field>
+            <field name="report_file">package_calculation.report_invoices</field>
+        </record>
+
+        <template id="package_calculation.report_invoices">
+            <t t-call="web.html_container">
+                <t t-call="web.external_layout">
+                    <div style="font-size: 10px; margin: 20px;">
+                        <table class="table mt16 border border-dark" style="width: 100%; border-collapse: collapse;">
+                            <thead style="font-size: 14px; background-color: #f2f2f2;">
+                                <tr style="text-align: center;">
+                                    <th colspan="5" style="padding: 10px; border-bottom: 2px solid #000;">Facturas desde: <t t-esc="start_date"/>, hasta: <t t-esc="end_date"/> </th>
+                                </tr>
+                            </thead>
+                        </table>
+
+                        <table class="table mt16 border border-dark" style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+                            <thead style="font-size: 12px; background-color: #f8f8f8;">
+                                <tr style="text-align: center; border-bottom: 2px solid #000;">
+                                    <th style="padding: 8px;">Numero de factura</th>
+                                    <th style="padding: 8px;">Cliente</th>
+                                    <th style="padding: 8px;">Fecha de Factura</th>
+                                    <th style="padding: 8px;">Importe sin impuestos</th>
+                                    <th style="padding: 8px;">Total con impuestos</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="records" t-as="record">
+                                    <tr style="text-align: center; border-bottom: 1px solid #ddd;">
+                                        <td style="padding: 8px;"><t t-esc="record['name']"/></td>
+                                        <td style="padding: 8px;"><t t-esc="record['cliente']"/></td>
+                                        <td style="padding: 8px;"><t t-esc="record['invoice_date']"/></td>
+                                        <td style="padding: 8px;"><t t-esc="record['amount_untaxed']"/></td>
+                                        <td style="padding: 8px;"><t t-esc="record['amount_total']"/></td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </template>
+
+    </data>
+</odoo>
