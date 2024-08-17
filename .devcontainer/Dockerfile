@@ -37,7 +37,7 @@ RUN apt-get update && apt-get install -y \
     && apt-get clean
 
 # Copiar los addons personalizados dentro del contenedor
-COPY ./addons_custom/package_calculation /mnt/extra-addons/package_calculation
+COPY ../addons_custom/package_calculation /mnt/extra-addons/package_calculation
 
 # Exponer el puerto 8069
 EXPOSE 8069
