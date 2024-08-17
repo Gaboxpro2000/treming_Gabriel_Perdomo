@@ -59,7 +59,7 @@ WORKDIR /odoo
 RUN git clone https://www.github.com/odoo/odoo --branch 17.0 --depth 1 .
 
 # Copiar los addons personalizados dentro del contenedor
-COPY ./addons_custom/package_calculation /mnt/extra-addons
+COPY ./addons_custom/package_calculation /mnt/extra-addons/package_calculation
 
 # Instalar dependencias de Python
 RUN pip3 install -r requirements.txt
