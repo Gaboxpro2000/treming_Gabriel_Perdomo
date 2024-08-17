@@ -1,0 +1,13 @@
+{
+    "name": "Odoo 17",
+    "dockerFile": "Dockerfile",
+    "extensions": [
+        "ms-python.python",
+        "oderwat.indent-rainbow"
+    ],
+    "forwardPorts": [8069],
+    "postCreateCommand": "pip3 install -r requirements.txt",
+    "settings": {
+        "python.pythonPath": "/usr/bin/python3"
+    }
+}
