@@ -1,14 +1,8 @@
-# Utilizar una imagen base de Ubuntu
-FROM ubuntu:22.04
+# Utilizar la imagen oficial de Odoo 17
+FROM odoo:17.0
 
-# Configurar el entorno
-ENV DEBIAN_FRONTEND=noninteractive
-
-# Instalar dependencias necesarias
+# Instalar dependencias adicionales si es necesario
 RUN apt-get update && apt-get install -y \
-    python3-pip \
-    python3-dev \
-    build-essential \
     libxml2-dev \
     libxslt1-dev \
     zlib1g-dev \
@@ -42,30 +36,11 @@ RUN apt-get update && apt-get install -y \
     gdebi-core \
     && apt-get clean
 
-# Instalar PostgreSQL
-RUN apt-get install -y postgresql postgresql-contrib
-
-# Configurar PostgreSQL
-USER postgres
-RUN service postgresql start && \
-    psql --command "CREATE USER odoo WITH SUPERUSER PASSWORD 'odoo';" && \
-    createdb -O odoo odoo && \
-    service postgresql stop
-USER root
-
-# Crear directorio para Odoo y clonar el repositorio de Odoo
-RUN mkdir /odoo
-WORKDIR /odoo
-RUN git clone https://www.github.com/odoo/odoo --branch 17.0 --depth 1 .
-
 # Copiar los addons personalizados dentro del contenedor
 COPY ./addons_custom/package_calculation /mnt/extra-addons/package_calculation
-
-# Instalar dependencias de Python
-RUN pip3 install -r requirements.txt
 
 # Exponer el puerto 8069
 EXPOSE 8069
 
 # Ejecutar Odoo
-CMD ["./odoo-bin", "-c", "/odoo/odoo.conf"]
+CMD ["odoo"]
