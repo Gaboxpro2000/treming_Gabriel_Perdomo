@@ -1,22 +1,29 @@
 # -*- coding: utf-8 -*-
-from odoo import http, _
+
+import json
+from odoo import http
 from odoo.http import request, Response
 
-class PackageCalculation(http.Controller):
-    # @http.route('/package_calculation/external_api/', auth='public')
-    @http.route('/package_calculation/external_api/', type='json', auth='public', methods=['POST'], csrf=False)
+class TestApi(http.Controller):
+
+    @http.route("/api/test", methods=["GET"],type="http",auth="none",csrf=False)
+    def test_endpoint(self):
+        print("HOLA!")
+
+    @http.route('/api/package_calculation/external_api/', type='json', auth='none', methods=['POST'], csrf=False)
     def data_external_api(self, **kwargs):
-        print('LLEGALLEGA')
-        print('LLEGALLEGA')
-        print('LLEGALLEGA')
-        # api_key = request.httprequest.headers.get('X-Api-Key')
+        try:
+            # Extraer el JSON recibido
+            data = json.loads(request.httprequest.data)
+            # Aquí puedes manejar el JSON recibido
+            print('JSON recibido:', data)
 
-        # # Validar la API key
-        # user = request.env['res.users'].search([('api_key', '=', api_key)], limit=1)
-        # if not user:
-        #     return Response("Unauthorized", status=401)
-
-        # data = {
-        #     'name':'Gabriel Perdomo'
-        # }
-        return '{"status": "success", "data": data}'
+            # Respuesta de éxito
+            response_data = {
+                "status": "success",
+                "data": data  # O cualquier otra respuesta que desees
+            }
+            return response_data
+        except Exception as e:
+            # Manejo de errores
+            return Response("Error procesando la solicitud: {}".format(e), status=400)
